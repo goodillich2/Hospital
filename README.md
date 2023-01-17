@@ -1,6 +1,3 @@
-   #SpingMarket E-commerce Web Application
-
------
 
 ###**Using Technologies:**
 *	Spring Boot
@@ -8,7 +5,7 @@
 *	Hibernate
 *	Tomcat
 *	Thymeleaf
-*	Amazon RDS Database
+*	PostgeSQL 
 
 
 
