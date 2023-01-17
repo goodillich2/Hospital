@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        button{
+            border: 1px solid;
+            border-radius: 5px;
+            background-color: #d3d3d3;
+            padding: 7px 7px;
+        }
+
+        html, body{
+            padding: 0px;
+            margin: 0px;
+            background-image:url("https://oir.mobi/uploads/posts/2021-03/1616535062_14-p-meditsinskii-fon-14.jpg");
+        }
+
+        .menu {
+            max-width: 100%;
+            height: auto;
+            overflow:hidden
+        }
+        .frame{
+            float:left;
+            width: 50%;
+            height: 100%;
+
+        }
+        .input{
+            width: 200px;
+            position: relative;
+            left: 42%;
+            transform: translate(-50%, 0);
+        }
+
+        i{
+            font-size: 20pt;
+            color: black;
+        }
+        p{
+            font-size: 20pt;
+            color: black;
+
+        }
+        span{
+            font-size: 30pt;
+            color: black;
+        }
+        hr{
+            color: black;
+            opacity: 1;
+
+        }
+    </style>
+</head>
+
+<body bgcolor="#fa8e47">
+<header>
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/doctors/list">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cart/">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Profile</a>
+                    </li>
+                </ul>
+
+
+
+                </ul>
+                <form class="d-flex">
+                    <authorize access="isAuthenticated()">
+                        <a class="nav-link" href="/auth/login">Login</a>
+                    </authorize>
+                    <a class="nav-link" href="/auth/logout">logout</a>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+<div class="menu">
+
+   <p style="  margin-left: 40pt";> <span th:text=${mess}></span></p>
+
+    <div class="frame" th:each="cart: ${cartDto.cartItems}" style=" padding:100px;  padding-top: 50px">
+
+        <hr noshade size="10">
+        <div th:each="timeOfAppointment: ${cart.timeOfAppointment}">
+            <p th:text="${timeOfAppointment.date}"></p>
+            <i th:text="${timeOfAppointment.doctor.name}" ></i>
+            <i th:text="${timeOfAppointment.doctor.surname}" style="font-size: 20pt"></i>
+        </div>
+
+        <form th:method="POST" th:action="@{/cart/delete/{cartItemId}(cartItemId = ${cart.getId()})}" style="margin-top: 15pt">
+            <input type="submit" value="Delete" STYLE="color: wheat; background: black;"/>
+        </form>
+
+        <hr noshade size="10">
+    </div>
+</div>
+
+
+</body>
+</html>
